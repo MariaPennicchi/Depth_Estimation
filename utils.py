@@ -3,6 +3,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from math import exp
 from matplotlib import pyplot as plt
+import os
 
 def visualize_img(img_tensor, depth_tensor, pred_tensor, suffix):
     img = img_tensor.numpy().transpose(1, 2, 0)  # Convert to numpy array and transpose
@@ -58,3 +59,29 @@ def ssim(img1, img2, window_size=11, size_average=True):
         return ssim_map.mean()
     else:
         return ssim_map.mean(1).mean(1).mean(1)
+
+
+'''
+def plot_loss(rmse, ssim, save_dir, train):
+    if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+    plt.figure(figsize=(8, 6))
+    epochs = range(4, len(rmse)*4+1, 4)
+    plt.ylim(0, 10)
+    plt.plot(epochs, rmse, label='RMSE', marker='o')
+    plt.plot(epochs, ssim, label='SSIM', marker='*')
+    plt.title('Metrics per Epoch', fontsize=16)
+    plt.xlabel('Epoch', fontsize=14)
+    plt.ylabel('Loss', fontsize=14)
+    plt.legend(fontsize=12)
+    plt.grid(True)
+    plt.tight_layout()
+
+    if train:
+        save_file = os.path.join(save_dir, "train_loss_plot.png")
+    else:
+        save_file = os.path.join(save_dir, "val_loss_plot.png")
+    plt.savefig(save_file, dpi=300)
+    #print(f"Grafico salvato in: {save_file}")
+    #plt.show()
+'''
