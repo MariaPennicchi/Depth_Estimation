@@ -23,6 +23,8 @@ The network is evaluated using two metrics:
 - **SSIM** (Structural Similarity Index)
 
 <p align=justify>
-While both metrics are used to assess performance, SSIM is particularly relevant in this context as it measures pixel-level structural similarity between predicted and ground-truth depth maps.  
-The model is trained using a combined loss function, balanced by an α (alpha) factor to weight the contribution of each criterion and achieve a trade-off between global accuracy and structural fidelity.
+While both metrics are used to assess performance, SSIM is particularly relevant in this context as it measures pixel-level structural similarity between the predicted and ground-truth depth maps.  
+The model is trained using a combined loss function that integrates L1 loss and the square root of the MSE loss, giving greater emphasis to large depth errors.  
+A fixed weighting factor is applied to balance the two components, encouraging both global accuracy and pixel-level smoothness.
 </p>
+
